@@ -8,7 +8,6 @@ from enemy import Enemy
 from ui import UI
 from particles import AnimationPlayer
 from random import choice, randint
-import messages
 
 class Level:
     def __init__(self, gameStateManager):
