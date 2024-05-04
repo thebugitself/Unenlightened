@@ -31,7 +31,7 @@ UI_BORDER_COLOR_ACTIVE = 'gold'
 
 weapon_data = {
     'sword': {'cooldown': 100, 'damage': 15, 'graphic':'../graphics/weapon/sword/full.png'},
-    'tombak': {'cooldown': 200, 'damage': 30, 'graphic':'../graphics/weapon/tombak/full.png'}
+    'tombak': {'cooldown': 100, 'damage': 30, 'graphic':'../graphics/weapon/tombak/full.png'}
 }
 
 Enemy_Data = {

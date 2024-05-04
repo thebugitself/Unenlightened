@@ -22,7 +22,6 @@ class Player(Entity):
 
         # movement sama dash
         self.direction = pygame.math.Vector2()
-        #self.def_speed = 5
         self.dash_speed = 40
         self.attacking = False
         self.attack_cooldown = 400
@@ -46,10 +45,9 @@ class Player(Entity):
         self.switch_duration_cooldown = 200
 
         #stats
-        self.stats = {'health': 100, 'energy': 60, 'attack': 10, 'speed': 5}
+        self.stats = {'health': 100, 'energy': 100, 'attack': 10, 'speed': 5}
         self.health = self.stats['health']
         self.energy = self.stats['energy']
-        self.exp = 123
         self.speed = self.stats['speed']
         
         #Durasi damage ke player
@@ -95,11 +93,15 @@ class Player(Entity):
                 self.direction.x = 0
 
             # attack input 
-            if keys[pygame.K_k] and not self.dashing:
+            if keys[pygame.K_k] and not self.dashing and self.energy >=5:
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 self.create_attack()
                 self.weapon_attack_sound.play()
+                if self.weapon_index == 0:
+                    self.energy -= 5
+                else:
+                    self.energy -= 15
 
             #dash
             if keys[pygame.K_LSHIFT] and self.can_dash and 'idle' not in self.status and self.energy>=10:
@@ -218,7 +220,7 @@ class Player(Entity):
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
-        if not self.eneble_get_atk:#Opsional make atau ennga
+        if not self.eneble_get_atk:
             alpha = self.wave_value()
             self.image.set_alpha(alpha)
         else:
@@ -230,8 +232,8 @@ class Player(Entity):
         return base_damage + weapon_damage
     
     def energy_drop(self):
-        if self.energy <= 60:
-            self.energy += 0.02
+        if self.energy <= 100:
+            self.energy += 0.08
 
     def update(self):
         self.keybind()
@@ -240,4 +242,4 @@ class Player(Entity):
         self.animate()
         self.move(self.speed)
         self.energy_drop()
-        
+        print(self.eneble_get_atk)
