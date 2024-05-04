@@ -8,14 +8,14 @@ from enemy import Enemy
 from ui import UI
 from particles import AnimationPlayer
 from random import choice, randint
-from level import SortingCamera
+from level import *
 
-class Level2:
+class Level2(Level):
     def __init__(self, gameStateManager):
+        super().__init__(gameStateManager)
         pygame.init() 
         self.font = pygame.font.Font(None,30)
         # Tampilan layar
-        self.gameStateManager = gameStateManager
         self.display_surface = pygame.display.get_surface()
         
         # Camera
