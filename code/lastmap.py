@@ -13,9 +13,6 @@ class Island(Level):
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         pygame.init() 
-        self.font = pygame.font.Font(None,30)
-        # Tampilan layar
-        self.display_surface = pygame.display.get_surface()
         
         # Camera
         self.visible_sprites = SortingCamera3()
@@ -36,7 +33,7 @@ class Island(Level):
         #particles
         self.animation_player = AnimationPlayer()
      
-    def create_map(self):
+    def create_map(self): #penerapan polimorpism
         layouts = {
             'boundary' : import_csv_layout('../graphics/map/island/CSVfile/map_blocks.csv'),
         }
@@ -50,18 +47,7 @@ class Island(Level):
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites], 'invisible')   
         self.player = Player((1024, 632),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
-        
-    def create_attack(self):
-        self.current_attack = Weapon(self.player,[self.visible_sprites, self.attack_sprites]) 
-
-    def destroy_attack(self):
-        if self.current_attack:
-            self.current_attack.kill()
-        self.current_attack = None
     
-    def draw_koordinat(self):
-        Player.koordinat(self.player.rect.x,1120,10,'x',self.font)
-        Player.koordinat(self.player.rect.y,1200,10,'y',self.font)
 
     def run(self):
         self.visible_sprites.custom_draw(self.player)

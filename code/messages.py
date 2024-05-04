@@ -17,6 +17,8 @@ image_lastclue = '../graphics/map/messages/lastclue.png'
 image_keepgoing = '../graphics/map/messages/keepgoing.png'
 image_goodbye = '../graphics/map/messages/goodbye.png'
 
+
+
 class Pesan:
     def draw(self, surface, path):
         self.path = path

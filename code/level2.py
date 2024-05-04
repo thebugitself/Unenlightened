@@ -14,9 +14,7 @@ class Level2(Level):
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         pygame.init() 
-        self.font = pygame.font.Font(None,30)
         # Tampilan layar
-        self.display_surface = pygame.display.get_surface()
         
         # Camera
         self.visible_sprites = SortingCamera2()
