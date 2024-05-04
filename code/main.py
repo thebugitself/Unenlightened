@@ -104,8 +104,8 @@ class Main:
                     if self.level2.rakunmalas1.healt <= 0 and  self.level2.rakunmalas2.healt <= 0 and  self.level2.rakunmalas3.healt <= 0:
                         if (3968 <= self.level2.player.rect.x <= 4032) and (2676 <= self.level2.player.rect.y <= 2602):
                             self.gameState.set_state('island')
+                            
                 if self.gameState.get_state() == 'island':
-                    
                     if (2091 <= self.island.player.rect.x <= 2164) and self.island.player.rect.y == 1298:
                         self.gameState.set_state('menu_tamatan')  
                 pygame.display.update()
