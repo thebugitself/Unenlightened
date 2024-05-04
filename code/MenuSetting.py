@@ -3,7 +3,6 @@ from config import *
 import random
 from config import *
 from game_state_manager import *
-import main
 
 class Menu:
     def __init__(self, gameStateManager):

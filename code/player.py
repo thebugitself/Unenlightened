@@ -1,7 +1,7 @@
 import pygame 
 from config import *
 from extfunction import import_folder
-from math import sin #Opsional make atau ennga
+from math import sin
 from game_state_manager import GameState
 from abstract import Entity
 

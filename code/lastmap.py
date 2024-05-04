@@ -4,7 +4,6 @@ from tile import Tile
 from player import Player
 from weapon import Weapon
 from extfunction import *
-from enemy import Enemy
 from ui import UI
 from particles import AnimationPlayer
 from random import choice, randint

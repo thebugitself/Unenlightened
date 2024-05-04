@@ -4,8 +4,6 @@ from level import Level
 from level2 import Level2
 from game_state_manager import GameState
 from MenuSetting import *
-from player import Player
-import random
 from messages import *
 from lastmap import Island
 
