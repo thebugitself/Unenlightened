@@ -1,0 +1,121 @@
+import pygame, sys
+from config import *
+import random
+from config import *
+from game_state_manager import *
+import main
+
+class Menu:
+    def __init__(self, gameStateManager):
+
+        self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+        self.bg = BackGround(0, 0, '../graphics/menu/BgMenu1.jpeg', 1)
+        self.title = Title(20, 50, '../graphics/menu/Title_4.png', 720, 100)
+        self.start_button = Button(30, 300, '../graphics/menu/start_btn.png', 0.8)
+        self.exit_button = Button(30, 450, '../graphics/menu/exit_btn.png', 0.8)
+        self.daun = Daun(WIDTH, HEIGTH)
+        self.gameStateManager = gameStateManager
+
+    def run(self):
+        self.bg.draw(self.screen)
+        self.title.draw(self.screen)
+        self.daun.update()
+        self.daun.draw(self.screen)
+        
+class Menu_kematian(Menu): #penerapan inheritance
+    def __init__(self, gameStateManager):
+        super().__init__(gameStateManager)
+        self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+        self.retry_button = Button(555, 350, '../graphics/menu/Revive_btn.png', 0.215)
+        self.exit_button = Button(555, 460, '../graphics/menu/exit_btn.png', 0.8)
+        self.bg_mati = Title(500, 100, '../graphics/menu/Bg_menu_mati2.png', 300, 500) #Kenapa pake Title karena fungsinya sama
+        
+    def run(self): #penerapan polimorfisme
+        self.bg_mati.draw(self.screen)
+
+class Menu_tamatan(Menu): #penerapan inheritance
+    def __init__(self, gameStateManager):
+        super().__init__(gameStateManager)
+        self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+        self.note_tamat_dapat_A = BackGround(0, 0, '../graphics/map/messages/goodbye.png', 1) #Kenapa pake Title karena fungsinya sama
+        self.exit_button = Button(1100, 60, '../graphics/menu/exit.png', 1)
+        
+    def run(self): #penerapan polimorfisme
+        self.note_tamat_dapat_A.draw(self.screen)
+        
+
+class Button():
+    def __init__(self, x, y, file_name, scale):
+        self.file_name = file_name
+        image = pygame.image.load(self.file_name).convert_alpha()
+        width = image.get_width()
+        height = image.get_height()
+        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+        self.clicked = False
+        
+    def draw(self, surface):
+        action = False
+        pos = pygame.mouse.get_pos() # mengambil data posisi mouse
+        
+        if self.rect.collidepoint(pos): #mengecek status mouse
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+                
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+        
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+        
+        return action
+
+class BackGround():
+    def __init__(self, x, y, file_name, scale):
+        self.image = pygame.transform.scale(pygame.image.load(file_name).convert_alpha(), (int(WIDTH * scale), int(HEIGTH * scale)))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+        
+    def draw(self, surface):
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+  
+
+class Title():
+    def __init__(self, x, y, file_name, width, height):
+        self.image = pygame.transform.scale(pygame.image.load(file_name).convert_alpha(), (width, height))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+  
+    def draw(self, surface):
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+
+
+class Daun:
+    def __init__(self, screen_width, screen_height):
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        self.daun_image = pygame.image.load('../graphics/menu/daun.png').convert_alpha()
+        self.daun_list = []
+        self.generate_daun()
+
+    def generate_daun(self):
+        for _ in range(10):
+            size = random.randint(40, 70)
+            speed = random.randint(1, 5)
+            x = random.randint(0, self.screen_width)
+            y = random.randint(-150, -50)
+            self.daun_list.append({"image": pygame.transform.scale(self.daun_image, (size, size)),
+                                   "rect": pygame.Rect(x, y, size, size),
+                                   "speed": speed})
+
+    def update(self):
+        for daun in self.daun_list:
+            daun["rect"].y += daun["speed"]
+            if daun["rect"].y > self.screen_height:
+                daun["rect"].y = random.randint(-100, -50)
+                daun["rect"].x = random.randint(0, self.screen_width)
+
+    def draw(self, screen):
+        for daun in self.daun_list:
+            screen.blit(daun["image"], daun["rect"])
