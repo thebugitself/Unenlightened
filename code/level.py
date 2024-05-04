@@ -27,7 +27,6 @@ class Level:
         self.attackable_sprites = pygame.sprite.Group() #sprite musuh. mengecek 2 collision  atk dan atkable
         
         #Setup Map dan Enemy
-        self.startup = True
         self.create_map()
         
         # user interface
