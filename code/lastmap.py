@@ -1,8 +1,7 @@
-import pygame, sys
+import pygame
 from config import *
 from tile import Tile
 from player import Player
-from weapon import Weapon
 from extfunction import *
 from ui import UI
 from particles import AnimationPlayer
