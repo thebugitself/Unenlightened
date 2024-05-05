@@ -6,10 +6,6 @@ HEIGTH   = 720
 FPS      = 60
 TILESIZE = 64
 
-#random koordinat
-koordinat_x = 192
-koordinat_y = random.randint(2670, 2962)
-
 # ui
 BAR_HEIGHT = 20
 HEALTH_BAR_WIDTH = 200
@@ -26,7 +22,7 @@ TEXT_COLOR = '#EEEEEE'
 
 # ui colors
 HEALTH_COLOR = 'red'
-ENERGY_COLOR = 'blue'
+ENERGY_COLOR = 'yellow'
 UI_BORDER_COLOR_ACTIVE = 'gold'
 
 weapon_data = {
