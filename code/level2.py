@@ -9,7 +9,7 @@ from particles import AnimationPlayer
 from random import choice, randint
 from level import *
 
-class Level2(Level):
+class Level2(Level): #inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         pygame.init() 
@@ -72,7 +72,7 @@ class Level2(Level):
                                     
                                 self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
 
-class SortingCamera2(SortingCamera):
+class SortingCamera2(SortingCamera): #inheritance
     def __init__(self):
         super().__init__()
 
@@ -81,25 +81,19 @@ class SortingCamera2(SortingCamera):
         self.__half_height = self.__display_surface.get_size()[1] // 2
         self.__offset = pygame.math.Vector2()
         
-        #creating the floor
         self.__floor_surf = pygame.image.load('../graphics/map/ground/ground2.png').convert()
         self.__floor_rect = self.__floor_surf.get_rect(topleft = (0,0))
     
-    def custom_draw(self,player):
+    def custom_draw(self,player): #polimorfisme
         
         self.__offset.x = player.rect.centerx - self.__half_width
         self.__offset.y = player.rect.centery - self.__half_height
 
-        #drawing the floor
         self.__display_surface.fill('#bbbbbb')
+
         floor_offset_pos = self.__floor_rect.topleft - self.__offset
         self.__display_surface.blit(self.__floor_surf, floor_offset_pos)
 
         for sprite in sorted(self.sprites(),key = lambda sprite: sprite.rect.centery):
             offset_pos = sprite.rect.topleft - self.__offset
             self.__display_surface.blit(sprite.image,offset_pos)
-            
-    def enemy_update(self, player):
-        enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']
-        for enemy in enemy_sprites:
-            enemy.enemy_update(player)

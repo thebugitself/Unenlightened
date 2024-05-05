@@ -135,8 +135,6 @@ class SortingCamera(pygame.sprite.Group):
         self.__half_height = self.__display_surface.get_size()[1] // 2
         self.__offset = pygame.math.Vector2()
         
-        #creating the floor
-        
         self.__floor_surf = pygame.image.load('../graphics/map/ground/ground.png').convert()
         self.__floor_rect = self.__floor_surf.get_rect(topleft = (0,0))
 
@@ -145,8 +143,8 @@ class SortingCamera(pygame.sprite.Group):
         self.__offset.x = player.rect.centerx - self.__half_width
         self.__offset.y = player.rect.centery - self.__half_height
 
-        #drawing the floor
         self.__display_surface.fill('#222222')
+        
         floor_offset_pos = self.__floor_rect.topleft - self.__offset
         self.__display_surface.blit(self.__floor_surf, floor_offset_pos)
 

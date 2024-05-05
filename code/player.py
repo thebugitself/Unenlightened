@@ -201,7 +201,7 @@ class Player(Entity):
             if current_time - self.hurt_time >= self.get_dmg_duration:
                 self.eneble_get_atk = True
 
-    def wave_value(self):#Opsional make atau ennga
+    def wave_value(self):
         value = sin(pygame.time.get_ticks())
         if value >= 0:
             return 255
@@ -211,12 +211,10 @@ class Player(Entity):
     def animate(self):
         animation = self.animations[self.status]
 
-        # loop over the frame index 
         self.frame_index += self.animation_speed
         if self.frame_index >= len(animation):
             self.frame_index = 0
 
-        # set the image
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
         

@@ -6,7 +6,6 @@ from game_state_manager import *
 
 class Menu:
     def __init__(self, gameStateManager):
-
         self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
         self.bg = BackGround(0, 0, '../graphics/menu/BgMenu1.jpeg', 1)
         self.title = Title(40, 50, '../graphics/menu/Title_4.png', 760, 100)
@@ -68,7 +67,6 @@ class Button():
             self.clicked = False
         
         self.surface.blit(self.image, (self.rect.x, self.rect.y))
-        
         return self.action
 
 class BackGround():

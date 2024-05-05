@@ -8,7 +8,7 @@ from messages import *
 from lastmap import Island
 
 class Main:
-    try:
+    try: #penanganan kesalahan
         def __init__(self):
             pygame.init() 
             self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
@@ -46,7 +46,7 @@ class Main:
                 self.states[self.gameState.get_state()].run()
                 if self.gameState.get_state() == 'menu':
                     if self.menu.start_button.draw(self.screen): # Mengubah status ketika tombol start ditekan wwww
-                        self.gameState.set_state('level')
+                        self.gameState.set_state('level2')
                     if self.menu.exit_button.draw(self.screen): # Keluar dari program saat tombol exit ditekan
                         pygame.quit()
                         sys.exit()

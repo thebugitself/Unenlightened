@@ -5,7 +5,7 @@ from extfunction import import_folder
 from math import sin 
 from abstract import Entity
 
-class Enemy(Entity):
+class Enemy(Entity): #inheritance
     def __init__(self,nama_monster,pos,groups,obstacle_sprites,damage_player,trigger_death_particles):
         super().__init__(groups,obstacle_sprites)
         self.sprite_type = 'enemy'

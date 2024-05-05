@@ -17,10 +17,8 @@ image_lastclue = '../graphics/map/messages/lastclue.png'
 image_keepgoing = '../graphics/map/messages/keepgoing.png'
 image_goodbye = '../graphics/map/messages/goodbye.png'
 
-
-
-class Pesan:
+class Pesan: #enkapsulasi
     def draw(self, surface, path):
-        self.path = path
-        self.notes = pygame.image.load(self.path).convert_alpha()
-        surface.blit(self.notes, (320, 180))
+        self.__path = path
+        self.__notes = pygame.image.load(self.__path).convert_alpha()
+        surface.blit(self.__notes, (320, 180))

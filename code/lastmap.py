@@ -8,7 +8,7 @@ from particles import AnimationPlayer
 from random import choice, randint
 from level import *
 
-class Island(Level):
+class Island(Level): #inherit
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         pygame.init() 
@@ -56,7 +56,7 @@ class Island(Level):
         self.draw_koordinat()
 
 
-class SortingCamera3(SortingCamera):
+class SortingCamera3(SortingCamera): #inheritance
     def __init__(self):
         super().__init__()
     
@@ -68,7 +68,7 @@ class SortingCamera3(SortingCamera):
         self.__floor_surf = pygame.image.load('../graphics/map/island/ground.png').convert()
         self.__floor_rect = self.__floor_surf.get_rect(topleft = (0,0))
     
-    def custom_draw(self,player):
+    def custom_draw(self,player): #polimorfisme
         
         self.__offset.x = player.rect.centerx - self.__half_width
         self.__offset.y = player.rect.centery - self.__half_height
