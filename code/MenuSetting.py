@@ -9,7 +9,7 @@ class Menu:
 
         self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
         self.bg = BackGround(0, 0, '../graphics/menu/BgMenu1.jpeg', 1)
-        self.title = Title(20, 50, '../graphics/menu/Title_4.png', 720, 100)
+        self.title = Title(40, 50, '../graphics/menu/Title_4.png', 760, 100)
         self.start_button = Button(30, 300, '../graphics/menu/start_btn.png', 0.8)
         self.exit_button = Button(30, 450, '../graphics/menu/exit_btn.png', 0.8)
         self.daun = Daun(WIDTH, HEIGTH)
@@ -46,29 +46,30 @@ class Menu_tamatan(Menu): #penerapan inheritance
 class Button():
     def __init__(self, x, y, file_name, scale):
         self.file_name = file_name
-        image = pygame.image.load(self.file_name).convert_alpha()
-        width = image.get_width()
-        height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
+        self.image = pygame.image.load(self.file_name).convert_alpha()
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+        self.image = pygame.transform.scale(self.image, (int(self.width * scale), int(self.height * scale)))
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         self.clicked = False
         
     def draw(self, surface):
-        action = False
-        pos = pygame.mouse.get_pos() # mengambil data posisi mouse
+        self.surface = surface
+        self.action = False
+        self.pos = pygame.mouse.get_pos() # mengambil data posisi mouse
         
-        if self.rect.collidepoint(pos): #mengecek status mouse
+        if self.rect.collidepoint(self.pos): #mengecek status mouse
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
-                action = True
+                self.action = True
                 
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
         
-        surface.blit(self.image, (self.rect.x, self.rect.y))
+        self.surface.blit(self.image, (self.rect.x, self.rect.y))
         
-        return action
+        return self.action
 
 class BackGround():
     def __init__(self, x, y, file_name, scale):
@@ -77,7 +78,8 @@ class BackGround():
         self.rect.topleft = (x, y)
         
     def draw(self, surface):
-        surface.blit(self.image, (self.rect.x, self.rect.y))
+        self.surface = surface
+        self.surface.blit(self.image, (self.rect.x, self.rect.y))
   
 
 class Title():
@@ -87,7 +89,8 @@ class Title():
         self.rect.topleft = (x, y)
   
     def draw(self, surface):
-        surface.blit(self.image, (self.rect.x, self.rect.y))
+        self.surface = surface
+        self.surface.blit(self.image, (self.rect.x, self.rect.y))
 
 
 class Daun:
@@ -100,21 +103,22 @@ class Daun:
 
     def generate_daun(self):
         for _ in range(10):
-            size = random.randint(40, 70)
-            speed = random.randint(1, 5)
-            x = random.randint(0, self.screen_width)
-            y = random.randint(-150, -50)
-            self.daun_list.append({"image": pygame.transform.scale(self.daun_image, (size, size)),
-                                   "rect": pygame.Rect(x, y, size, size),
-                                   "speed": speed})
+            self.size = random.randint(40, 70)
+            self.speed = random.randint(1, 5)
+            self.x = random.randint(0, self.screen_width)
+            self.y = random.randint(-150, -50)
+            self.daun_list.append({"image": pygame.transform.scale(self.daun_image, (self.size, self.size)),
+                                   "rect": pygame.Rect(self.x, self.y, self.size, self.size),
+                                   "speed": self.speed})
 
     def update(self):
-        for daun in self.daun_list:
-            daun["rect"].y += daun["speed"]
-            if daun["rect"].y > self.screen_height:
-                daun["rect"].y = random.randint(-100, -50)
-                daun["rect"].x = random.randint(0, self.screen_width)
+        for self.daun in self.daun_list:
+            self.daun["rect"].y += self.daun["speed"]
+            if self.daun["rect"].y > self.screen_height:
+                self.daun["rect"].y = random.randint(-100, -50)
+                self.daun["rect"].x = random.randint(0, self.screen_width)
 
     def draw(self, screen):
-        for daun in self.daun_list:
-            screen.blit(daun["image"], daun["rect"])
+        self.screen = screen
+        for self.daun in self.daun_list:
+            self.screen.blit(self.daun["image"], self.daun["rect"])
