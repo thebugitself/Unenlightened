@@ -34,7 +34,7 @@ class Level2(Level):
         #particles
         self.animation_player = AnimationPlayer()
      
-    def create_map(self):
+    def create_map(self): #polimorfisme
         layouts = {
             'boundary' : import_csv_layout('../graphics/map/csvFile/map_blocks.csv'),
             'topwall' : import_csv_layout('../graphics/map/csvFile/map_topwall.csv'),
@@ -71,14 +71,6 @@ class Level2(Level):
                                     nama_monster = 'squid'
                                     
                                 self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
-    
-    def run(self):
-        self.visible_sprites.custom_draw(self.player)
-        self.visible_sprites.enemy_update(self.player)
-        self.visible_sprites.update()
-        self.player_atk_logic()
-        self.ui.display(self.player)
-        self.draw_koordinat()
 
 class SortingCamera2(SortingCamera):
     def __init__(self):

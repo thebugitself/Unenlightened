@@ -32,7 +32,7 @@ class Island(Level):
         #particles
         self.animation_player = AnimationPlayer()
      
-    def create_map(self): #penerapan polimorpism
+    def create_map(self): #penerapan polimorfisme
         layouts = {
             'boundary' : import_csv_layout('../graphics/map/island/CSVfile/map_blocks.csv'),
         }
@@ -48,7 +48,7 @@ class Island(Level):
         self.player = Player((1024, 632),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
     
 
-    def run(self):
+    def run(self): #polimorfisme
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.enemy_update(self.player)
         self.visible_sprites.update()

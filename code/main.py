@@ -77,7 +77,7 @@ class Main:
                     if (750 <= self.level.player.rect.x <= 800) and self.level.player.rect.y == 2798:
                         self.pesan.draw(self.screen, image_coordinate)
                     if (3812 <= self.level.player.rect.x <= 3863) and self.level.player.rect.y == 2734:
-                        self.pesan.draw(self.screen, image_raped)
+                        self.pesan.draw(self.screen, image_info)
                     if self.level.player.rect.x == 640 and self.level.player.rect.y == 174:
                         self.pesan.draw(self.screen, image_tolong)
                     if self.level.player.rect.x == 1024 and self.level.player.rect.y == 238:
