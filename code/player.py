@@ -10,7 +10,7 @@ class Player(Entity):
         super().__init__(groups,obstacle_sprites)
         
         self.gameState = GameState('level')
-        self.image = pygame.image.load('../graphics/test/player.png').convert_alpha()
+        self.image = pygame.image.load('../graphics/actor/MC/down_idle/idle_down.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
 
@@ -242,4 +242,3 @@ class Player(Entity):
         self.animate()
         self.move(self.speed)
         self.energy_drop()
-        print(self.eneble_get_atk)
