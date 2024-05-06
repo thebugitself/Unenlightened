@@ -37,12 +37,12 @@ class Dungeon:
      
     def create_map(self):
         layouts = {
-            'boundary' : import_csv_layout('../graphics/map/csvFile/map_blocks.csv'),
-            'topwall' : import_csv_layout('../graphics/map/csvFile/map_topwall.csv'),
-            'entities': import_csv_layout('../graphics/map/csvFile/map_entity.csv') 
+            'boundary' : import_csv_layout('../assets/map/csvFile/map_blocks.csv'),
+            'topwall' : import_csv_layout('../assets/map/csvFile/map_topwall.csv'),
+            'entities': import_csv_layout('../assets/map/csvFile/map_entity.csv') 
         }
         collide_surf = {
-            'topwall' : import_folder('../graphics/map/topwall')
+            'topwall' : import_folder('../assets/map/topwall')
         }
         
         for style, layout in layouts.items():
@@ -135,7 +135,7 @@ class SortingCamera(pygame.sprite.Group):
         self.__half_height = self.__display_surface.get_size()[1] // 2
         self.__offset = pygame.math.Vector2()
         
-        self.__floor_surf = pygame.image.load('../graphics/map/ground/ground.png').convert()
+        self.__floor_surf = pygame.image.load('../assets/map/ground/ground.png').convert()
         self.__floor_rect = self.__floor_surf.get_rect(topleft = (0,0))
 
     def custom_draw(self,player):

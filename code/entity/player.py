@@ -10,7 +10,7 @@ class Player(Entity):
         super().__init__(groups,obstacle_sprites)
         
         self.gameState = GameState('level')
-        self.image = pygame.image.load('../graphics/actor/MC/down_idle/idle_down.png').convert_alpha()
+        self.image = pygame.image.load('../assets/actor/MC/down_idle/idle_down.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
 
@@ -60,7 +60,7 @@ class Player(Entity):
         self.weapon_attack_sound.set_volume(0.4)
 
     def import_graphics(self):
-        character_path = '../graphics/actor/MC/'
+        character_path = '../assets/actor/MC/'
         self.animations = {'up': [],'down': [],'left': [],'right': [],
             'right_idle':[],'left_idle':[],'up_idle':[],'down_idle':[],
             'right_attack':[],'left_attack':[],'up_attack':[],'down_attack':[]}

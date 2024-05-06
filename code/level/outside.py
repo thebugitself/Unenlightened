@@ -34,7 +34,7 @@ class OutsideDungeon(Dungeon): #inherit
      
     def create_map(self): #penerapan polimorfisme
         layouts = {
-            'boundary' : import_csv_layout('../graphics/map/island/CSVfile/map_blocks.csv'),
+            'boundary' : import_csv_layout('../assets/map/island/CSVfile/map_blocks.csv'),
         }
         
         for style, layout in layouts.items():
@@ -65,7 +65,7 @@ class SortingCamera3(SortingCamera): #inheritance
         self.__half_height = self.__display_surface.get_size()[1] // 2
         self.__offset = pygame.math.Vector2()
         
-        self.__floor_surf = pygame.image.load('../graphics/map/island/ground.png').convert()
+        self.__floor_surf = pygame.image.load('../assets/map/island/ground.png').convert()
         self.__floor_rect = self.__floor_surf.get_rect(topleft = (0,0))
     
     def custom_draw(self,player): #polimorfisme

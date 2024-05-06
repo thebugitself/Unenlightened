@@ -49,7 +49,7 @@ class Enemy(Entity): #inheritance
     
     def import_graphics(self, nama):
         self.animation = {'idle':[], 'move':[],'attack':[]}
-        main_path = f'../graphics/actor/Enemy/monsters/{nama}/'
+        main_path = f'../assets/actor/Enemy/monsters/{nama}/'
         
         for animation in self.animation.keys():
             self.animation[animation] = import_folder(main_path + animation)

@@ -9,7 +9,7 @@ BAR_HEIGHT = 20
 HEALTH_BAR_WIDTH = 200
 ENERGY_BAR_WIDTH = 140
 ITEM_BOX_SIZE = 80
-UI_FONT = '../graphics/font/joystix.ttf'
+UI_FONT = '../assets/font/joystix.ttf'
 UI_FONT_SIZE = 18
 
 # general colors
@@ -24,8 +24,8 @@ ENERGY_COLOR = 'yellow'
 UI_BORDER_COLOR_ACTIVE = 'gold'
 
 weapon_data = {
-    'sword': {'cooldown': 100, 'damage': 15, 'graphic':'../graphics/weapon/sword/full.png'},
-    'tombak': {'cooldown': 100, 'damage': 30, 'graphic':'../graphics/weapon/tombak/full.png'}
+    'sword': {'cooldown': 100, 'damage': 15, 'graphic':'../assets/weapon/sword/full.png'},
+    'tombak': {'cooldown': 100, 'damage': 30, 'graphic':'../assets/weapon/tombak/full.png'}
 }
 
 Enemy_Data = {

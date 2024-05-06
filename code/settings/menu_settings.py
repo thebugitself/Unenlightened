@@ -6,10 +6,10 @@ from settings.game_state_manager import *
 class Menu:
     def __init__(self, gameStateManager):
         self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
-        self.bg = BackGround(0, 0, '../graphics/menu/BgMenu1.jpeg', 1)
-        self.title = Title(40, 50, '../graphics/menu/Title_4.png', 760, 100)
-        self.start_button = Button(30, 300, '../graphics/menu/start_btn.png', 0.8)
-        self.exit_button = Button(30, 450, '../graphics/menu/exit_btn.png', 0.8)
+        self.bg = BackGround(0, 0, '../assets/menu/BgMenu1.jpeg', 1)
+        self.title = Title(40, 50, '../assets/menu/Title_4.png', 760, 100)
+        self.start_button = Button(30, 300, '../assets/menu/start_btn.png', 0.8)
+        self.exit_button = Button(30, 450, '../assets/menu/exit_btn.png', 0.8)
         self.daun = Daun(WIDTH, HEIGTH)
         self.gameStateManager = gameStateManager
 
@@ -23,9 +23,9 @@ class Menu_kematian(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
-        self.retry_button = Button(555, 350, '../graphics/menu/Revive_btn.png', 0.215)
-        self.exit_button = Button(555, 460, '../graphics/menu/exit_btn.png', 0.8)
-        self.bg_mati = Title(500, 100, '../graphics/menu/Bg_menu_mati2.png', 300, 500) #Kenapa pake Title karena fungsinya sama
+        self.retry_button = Button(555, 350, '../assets/menu/Revive_btn.png', 0.215)
+        self.exit_button = Button(555, 460, '../assets/menu/exit_btn.png', 0.8)
+        self.bg_mati = Title(500, 100, '../assets/menu/Bg_menu_mati2.png', 300, 500) #Kenapa pake Title karena fungsinya sama
         
     def run(self): #penerapan polimorfisme
         self.bg_mati.draw(self.screen)
@@ -34,8 +34,8 @@ class Menu_tamatan(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
-        self.note_tamat_dapat_A = BackGround(0, 0, '../graphics/map/messages/goodbye.png', 1) #Kenapa pake Title karena fungsinya sama
-        self.exit_button = Button(1100, 60, '../graphics/menu/exit.png', 1)
+        self.note_tamat_dapat_A = BackGround(0, 0, '../assets/map/messages/goodbye.png', 1) #Kenapa pake Title karena fungsinya sama
+        self.exit_button = Button(1100, 60, '../assets/menu/exit.png', 1)
         
     def run(self): #penerapan polimorfisme
         self.note_tamat_dapat_A.draw(self.screen)
@@ -94,7 +94,7 @@ class Daun:
     def __init__(self, screen_width, screen_height):
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.daun_image = pygame.image.load('../graphics/menu/daun.png').convert_alpha()
+        self.daun_image = pygame.image.load('../assets/menu/daun.png').convert_alpha()
         self.daun_list = []
         self.generate_daun()
 
