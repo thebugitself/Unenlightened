@@ -1,8 +1,8 @@
 import pygame 
-from settings.config_settings import *
+from settings.config_settings import Config
 from settings.extfunction import import_folder
 from math import sin
-from settings.game_state_manager import GameState
+from service.game_state_manager import GameState
 from entity.abstract import Entity
 
 class Player(Entity):
@@ -39,7 +39,7 @@ class Player(Entity):
         self.create_attack = create_attack
         self.destroy_attack = destroy_attack
         self.weapon_index = 0
-        self.weapon = list(weapon_data.keys())[self.weapon_index]
+        self.weapon = list(Config.weapon_data.keys())[self.weapon_index]
         self.can_switch_weapon = True
         self.weapon_switch_time = None
         self.switch_duration_cooldown = 200
@@ -117,12 +117,12 @@ class Player(Entity):
                 self.can_switch_weapon = False
                 self.weapon_switch_time = pygame.time.get_ticks()
                 
-                if self.weapon_index < len(list(weapon_data.keys())) - 1:
+                if self.weapon_index < len(list(Config.weapon_data.keys())) - 1:
                     self.weapon_index += 1
                 else:
                     self.weapon_index = 0
                     
-                self.weapon = list(weapon_data.keys())[self.weapon_index]
+                self.weapon = list(Config.weapon_data.keys())[self.weapon_index]
 
     def get_status(self):
 
@@ -180,7 +180,7 @@ class Player(Entity):
         current_time = pygame.time.get_ticks()
 
         if self.attacking:
-            if current_time - self.attack_time >= self.attack_cooldown + weapon_data[self.weapon]['cooldown']:
+            if current_time - self.attack_time >= self.attack_cooldown + Config.weapon_data[self.weapon]['cooldown']:
                 self.attacking = False
                 self.destroy_attack()
 
@@ -226,7 +226,7 @@ class Player(Entity):
 
     def get_weapon_damage(self): # Mendapatkan total nilai damage dari weapon dan player #29/04/2024
         base_damage = self.stats['attack']
-        weapon_damage = weapon_data[self.weapon]['damage']
+        weapon_damage = Config.weapon_data[self.weapon]['damage']
         return base_damage + weapon_damage
     
     def energy_drop(self):

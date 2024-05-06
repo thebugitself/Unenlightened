@@ -1,5 +1,5 @@
 import pygame
-from settings.config_settings import *
+from settings.config_settings import Config
 from interfaces.tile import Tile
 from entity.player import Player
 from settings.extfunction import *
@@ -41,8 +41,8 @@ class OutsideDungeon(Dungeon): #inherit
             for row_index,row in enumerate(layout):
                 for col_index, col in enumerate(row):
                     if col != '-1':
-                        x = col_index * TILESIZE
-                        y = row_index * TILESIZE
+                        x = col_index * Config.TILESIZE
+                        y = row_index * Config.TILESIZE
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites], 'invisible')   
         self.player = Player((1024, 632),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)

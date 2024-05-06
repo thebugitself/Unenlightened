@@ -21,7 +21,7 @@ class Enemy(Entity): #inheritance
         self.hitbox = self.rect.inflate(0,-10)
         
         self.nama_monster = nama_monster
-        monster_info = Enemy_Data[self.nama_monster]
+        monster_info = Config.Enemy_Data[self.nama_monster]
         self.healt = monster_info['healt']
         self.attack_damage = monster_info['damage']
         self.deffend = monster_info['deffend']

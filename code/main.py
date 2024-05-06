@@ -1,27 +1,31 @@
 import pygame, sys
-from settings.config_settings import *
+from settings.config_settings import Config
 from level.dungeon import Dungeon
 from level.icedungeon import IceDungeon
-from settings.game_state_manager import GameState
+from service.game_state_manager import GameState
 from settings.menu_settings import *
 from interfaces.messages import *
 from level.outside import OutsideDungeon
+from service.save_load_manager import SaveLoadManager
+import os
 
 class Main:
     try: #penanganan kesalahan
         def __init__(self):
             pygame.init() 
-            self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+            self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
             pygame.display.set_caption('unenlightened')
             self.clock = pygame.time.Clock()
             self.gameState = GameState('menu')
             self.Dungeon = Dungeon(self.gameState)
             self.IceDungeon = IceDungeon(self.gameState)
+            self.save_load_manager = SaveLoadManager(".save","save_data")
             self.menu = Menu('menu')
             self.menu_kematian = Menu_kematian('menu_kematian')
             self.pesan = Pesan()
             self.outside = OutsideDungeon(self.gameState)
             self.tamat = Menu_tamatan('menu_tamatan')
+            self.save = False
 
             self.states = {
                 'Dungeon':self.Dungeon,
@@ -29,7 +33,7 @@ class Main:
                 'menu': self.menu,
                 'menu_kematian': self.menu_kematian,
                 'outside': self.outside,
-                'menu_tamatan' :self.tamat
+                'menu_tamatan' :self.tamat,
             }
 
             #main sound
@@ -40,13 +44,29 @@ class Main:
             while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
+                        if self.gameState.get_state() == "Dungeon":
+                            self.Dungeon.save_player_location()
+                            self.save = True
+                        elif self.gameState.get_state() == "IceDungeon":
+                            self.save_load_manager.del_file(Config.SAVE_DUNGEON_PLAYER_POS)
+                            self.IceDungeon.save_player_location()
                         pygame.quit()
                         sys.exit()
                 
                 self.states[self.gameState.get_state()].run()
                 if self.gameState.get_state() == 'menu':
                     if self.menu.start_button.draw(self.screen): # Mengubah status ketika tombol start ditekan wwww
-                        self.gameState.set_state('Dungeon')
+                        # if self.save and self.ice:
+                        #     self.gameState.set_state()
+                        if os.path.exists('save_data/save_dungeon_player_pos.save') and self.save:
+                            self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS).split(":")[2])
+                        if not os.path.exists('save_data/save_dungeon_player_pos.save') and os.path.exists('save_data/save_icedungeon_player_pos.save'):
+                            self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS).split(":")[2])
+                            print("lalalala")
+                        # if self.save and not self.ice:
+                        #     self.gameState.set_state(self.save_load_manager.load_data(AppConstans.SAVE_DUNGEON_PLAYER_POS).split(":")[2])
+                        else:
+                            self.gameState.set_state('Dungeon')
                     if self.menu.exit_button.draw(self.screen): # Keluar dari program saat tombol exit ditekan
                         pygame.quit()
                         sys.exit()
@@ -109,7 +129,7 @@ class Main:
                     if (2091 <= self.outside.player.rect.x <= 2164) and self.outside.player.rect.y == 1298:
                         self.gameState.set_state('menu_tamatan')  
                 pygame.display.update()
-                self.clock.tick(FPS)
+                self.clock.tick(Config.FPS)
 
     except pygame.error as e:
         print('pygame error:', e)

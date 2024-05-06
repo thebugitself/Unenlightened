@@ -1,16 +1,16 @@
-import pygame, sys
-from settings.config_settings import *
+import pygame
+from settings.config_settings import Config
 import random
-from settings.game_state_manager import *
+from service.game_state_manager import *
 
 class Menu:
     def __init__(self, gameStateManager):
-        self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+        self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
         self.bg = BackGround(0, 0, '../assets/menu/BgMenu1.jpeg', 1)
         self.title = Title(40, 50, '../assets/menu/Title_4.png', 760, 100)
         self.start_button = Button(30, 300, '../assets/menu/start_btn.png', 0.8)
         self.exit_button = Button(30, 450, '../assets/menu/exit_btn.png', 0.8)
-        self.daun = Daun(WIDTH, HEIGTH)
+        self.daun = Daun(Config.WIDTH, Config.HEIGTH)
         self.gameStateManager = gameStateManager
 
     def run(self):
@@ -22,7 +22,7 @@ class Menu:
 class Menu_kematian(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
-        self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+        self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
         self.retry_button = Button(555, 350, '../assets/menu/Revive_btn.png', 0.215)
         self.exit_button = Button(555, 460, '../assets/menu/exit_btn.png', 0.8)
         self.bg_mati = Title(500, 100, '../assets/menu/Bg_menu_mati2.png', 300, 500) #Kenapa pake Title karena fungsinya sama
@@ -33,7 +33,7 @@ class Menu_kematian(Menu): #penerapan inheritance
 class Menu_tamatan(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
-        self.screen = pygame.display.set_mode((WIDTH,HEIGTH))
+        self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
         self.note_tamat_dapat_A = BackGround(0, 0, '../assets/map/messages/goodbye.png', 1) #Kenapa pake Title karena fungsinya sama
         self.exit_button = Button(1100, 60, '../assets/menu/exit.png', 1)
         
@@ -70,7 +70,7 @@ class Button():
 
 class BackGround():
     def __init__(self, x, y, file_name, scale):
-        self.image = pygame.transform.scale(pygame.image.load(file_name).convert_alpha(), (int(WIDTH * scale), int(HEIGTH * scale)))
+        self.image = pygame.transform.scale(pygame.image.load(file_name).convert_alpha(), (int(Config.WIDTH * scale), int(Config.HEIGTH * scale)))
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         

@@ -20,5 +20,5 @@ image_goodbye = '../assets/map/messages/goodbye.png'
 class Pesan: #enkapsulasi
     def draw(self, surface, path):
         self.__path = path
-        self.__notes = pygame.image.load(self.__path).convert_alpha()
+        self.__notes = pygame.image.load(self.__path).convert()
         surface.blit(self.__notes, (320, 180))

@@ -1,5 +1,5 @@
 import pygame
-from settings.config_settings import *
+from settings.config_settings import Config
 from interfaces.tile import Tile
 from entity.player import Player
 from interfaces.weapon import Weapon
@@ -9,9 +9,15 @@ from interfaces.ui import UI
 from interfaces.particles import AnimationPlayer
 from random import randint
 from extmodul.game_light import Light
+from service.save_load_manager import SaveLoadManager
+
 class Dungeon:
     def __init__(self, gameStateManager):
-        pygame.init() 
+        pygame.init()
+        #init
+        self.save_load_manager = SaveLoadManager(".save","save_data")
+        self.initial_spawn = self.load_player_location()
+
         self.font = pygame.font.Font(None,30)
         # Tampilan layar
         self.gameStateManager = gameStateManager
@@ -34,7 +40,9 @@ class Dungeon:
 
         #particles
         self.animation_player = AnimationPlayer()
-     
+        #other
+        
+    
     def create_map(self):
         layouts = {
             'boundary' : import_csv_layout('../assets/map/csvFile/map_blocks.csv'),
@@ -49,8 +57,8 @@ class Dungeon:
             for row_index,row in enumerate(layout):
                 for col_index, col in enumerate(row):
                     if col != '-1':
-                        x = col_index * TILESIZE
-                        y = row_index * TILESIZE
+                        x = col_index * Config.TILESIZE
+                        y = row_index * Config.TILESIZE
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites], 'invisible')   
                         if style == 'topwall' :
@@ -58,7 +66,8 @@ class Dungeon:
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'topwall', surf)
                         if style == 'entities' :
                             if col == '0':
-                                self.player = Player((197,2788),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)#Player
+                                
+                                self.player = Player(self.initial_spawn,[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)#Player
                             else:
                                 if col == '1':
                                     self.raccoon1 = Enemy('raccoon',(4600,2700),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
@@ -67,10 +76,10 @@ class Dungeon:
                                 elif col == '2':
                                     nama_monster = 'spirit'
                                 elif col == '3':
-                                    nama_monster = 'bamboo'
+                                    nama_monster = 'bamboo' 
                                 else:
                                     nama_monster = 'spirit'
-                                    
+
                                 self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
         
     def create_attack(self):
@@ -116,6 +125,17 @@ class Dungeon:
         Player.koordinat(self.player.rect.x,1120,10,'x',self.font)
         Player.koordinat(self.player.rect.y,1200,10,'y',self.font)
 
+    def save_player_location(self):
+        player_pos = f"{self.player.rect.x}:{self.player.rect.y}:Dungeon"
+        self.save_load_manager.save_data(player_pos,Config.SAVE_DUNGEON_PLAYER_POS)
+
+    def load_player_location(self):
+        player_pos = self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS)
+        if player_pos:
+            player_pos =( int(player_pos.split(":")[0]), int(player_pos.split(":")[1]))
+            return player_pos
+        return (197,2788)
+    
     def run(self):
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.enemy_update(self.player)
