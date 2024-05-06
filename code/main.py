@@ -56,15 +56,10 @@ class Main:
                 self.states[self.gameState.get_state()].run()
                 if self.gameState.get_state() == 'menu':
                     if self.menu.start_button.draw(self.screen): # Mengubah status ketika tombol start ditekan wwww
-                        # if self.save and self.ice:
-                        #     self.gameState.set_state()
                         if os.path.exists('save_data/save_dungeon_player_pos.save') and self.save:
                             self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS).split(":")[2])
                         if not os.path.exists('save_data/save_dungeon_player_pos.save') and os.path.exists('save_data/save_icedungeon_player_pos.save'):
                             self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS).split(":")[2])
-                            print("lalalala")
-                        # if self.save and not self.ice:
-                        #     self.gameState.set_state(self.save_load_manager.load_data(AppConstans.SAVE_DUNGEON_PLAYER_POS).split(":")[2])
                         else:
                             self.gameState.set_state('Dungeon')
                     if self.menu.exit_button.draw(self.screen): # Keluar dari program saat tombol exit ditekan

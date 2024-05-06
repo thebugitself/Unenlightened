@@ -82,6 +82,15 @@ class IceDungeon(Dungeon): #inheritance
             return player_pos
         return (4864,876)
 
+    def run(self):
+        self.visible_sprites.custom_draw(self.player)
+        self.visible_sprites.enemy_update(self.player)
+        self.ui.display(self.player)
+        self.draw_koordinat()
+        self.visible_sprites.update()
+        self.player_atk_logic()
+        
+
 class SortingCamera2(SortingCamera): #inheritance
     def __init__(self):
         super().__init__()
