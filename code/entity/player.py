@@ -22,7 +22,7 @@ class Player(Entity):
 
         # movement sama dash
         self.direction = pygame.math.Vector2()
-        self.dash_speed = 40
+        self.dash_speed = 60
         self.attacking = False
         self.attack_cooldown = 400
         self.attack_time = None
@@ -45,7 +45,7 @@ class Player(Entity):
         self.switch_duration_cooldown = 200
 
         #stats
-        self.stats = {'health': 100, 'energy': 100, 'attack': 10, 'speed': 5}
+        self.stats = {'health': 999999, 'energy': 9999, 'attack': 999, 'speed': 40}
         self.health = self.stats['health']
         self.energy = self.stats['energy']
         self.speed = self.stats['speed']

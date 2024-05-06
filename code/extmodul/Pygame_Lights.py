@@ -1,6 +1,4 @@
-import math as meth
 import numpy as np
-
 import pygame
 from pygame.locals import *
 

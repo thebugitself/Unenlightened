@@ -46,7 +46,6 @@ class OutsideDungeon(Dungeon): #inherit
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites], 'invisible')   
         self.player = Player((1024, 632),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
-    
 
     def run(self): #polimorfisme
         self.visible_sprites.custom_draw(self.player)

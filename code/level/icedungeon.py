@@ -71,18 +71,18 @@ class IceDungeon(Dungeon): #inheritance
                                     
                                 self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
     
-    def save_player_location(self):
+    def save_player_location(self):#polimorfisme
         player_pos = f"{self.player.rect.x}:{self.player.rect.y}:IceDungeon"
         self.save_load_manager.save_data(player_pos,Config.SAVE_ICEDUNGEON_PLAYER_POS)
 
-    def load_player_location(self):
+    def load_player_location(self):#polimorfisme
         player_pos = self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS)
         if player_pos:
             player_pos =( int(player_pos.split(":")[0]), int(player_pos.split(":")[1]))
             return player_pos
         return (4864,876)
 
-    def run(self):
+    def run(self): #polimorfisme
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.enemy_update(self.player)
         self.ui.display(self.player)

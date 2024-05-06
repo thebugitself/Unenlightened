@@ -4,7 +4,7 @@ from pygame.locals import *
 
 
 class Light:
-    def __init__(self,screen,x=640,y=360,radius = 300,size=None,center=(0,0),intensity = 10):
+    def __init__(self,screen,x=640,y=360,radius = 300,size=None,center=(0,0),intensity = 5):
         self.x = x
         if size is None:
             self.size = screen.get_size()

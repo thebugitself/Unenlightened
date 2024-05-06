@@ -18,6 +18,7 @@ class Menu:
         self.title.draw(self.screen)
         self.daun.update()
         self.daun.draw(self.screen)
+
         
 class Menu_kematian(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
@@ -29,6 +30,7 @@ class Menu_kematian(Menu): #penerapan inheritance
         
     def run(self): #penerapan polimorfisme
         self.bg_mati.draw(self.screen)
+        
 
 class Menu_tamatan(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
@@ -39,7 +41,7 @@ class Menu_tamatan(Menu): #penerapan inheritance
         
     def run(self): #penerapan polimorfisme
         self.note_tamat_dapat_A.draw(self.screen)
-        
+
 
 class Button():
     def __init__(self, x, y, file_name, scale):

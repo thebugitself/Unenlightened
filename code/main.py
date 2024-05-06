@@ -3,14 +3,14 @@ from settings.config_settings import Config
 from level.dungeon import Dungeon
 from level.icedungeon import IceDungeon
 from service.game_state_manager import GameState
-from settings.menu_settings import *
+from interfaces.menu import *
 from interfaces.messages import *
 from level.outside import OutsideDungeon
 from service.save_load_manager import SaveLoadManager
 import os
 
 class Main:
-    try: #penanganan kesalahan
+    try:
         def __init__(self):
             pygame.init() 
             self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
@@ -18,12 +18,12 @@ class Main:
             self.clock = pygame.time.Clock()
             self.gameState = GameState('menu')
             self.Dungeon = Dungeon(self.gameState)
+            self.outside = OutsideDungeon(self.gameState)
             self.IceDungeon = IceDungeon(self.gameState)
             self.save_load_manager = SaveLoadManager(".save","save_data")
             self.menu = Menu('menu')
             self.menu_kematian = Menu_kematian('menu_kematian')
             self.pesan = Pesan()
-            self.outside = OutsideDungeon(self.gameState)
             self.tamat = Menu_tamatan('menu_tamatan')
             self.save = False
 
@@ -56,9 +56,9 @@ class Main:
                 self.states[self.gameState.get_state()].run()
                 if self.gameState.get_state() == 'menu':
                     if self.menu.start_button.draw(self.screen): # Mengubah status ketika tombol start ditekan wwww
-                        if os.path.exists('save_data/save_dungeon_player_pos.save') and self.save:
+                        if os.path.exists('../save_data/save_dungeon_player_pos.save') and self.save:
                             self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS).split(":")[2])
-                        if not os.path.exists('save_data/save_dungeon_player_pos.save') and os.path.exists('save_data/save_icedungeon_player_pos.save'):
+                        if not os.path.exists('../save_data/save_dungeon_player_pos.save') and os.path.exists('../save_data/save_icedungeon_player_pos.save'):
                             self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS).split(":")[2])
                         else:
                             self.gameState.set_state('Dungeon')
@@ -117,7 +117,7 @@ class Main:
                     if self.IceDungeon.player.rect.x == 1856 and self.IceDungeon.player.rect.y == 2286:
                         self.pesan.draw(self.screen, image_path)
                     if self.IceDungeon.rakunmalas1.healt <= 0 and  self.IceDungeon.rakunmalas2.healt <= 0 and  self.IceDungeon.rakunmalas3.healt <= 0:
-                        if (3968 <= self.IceDungeon.player.rect.x <= 4032) and (2676 <= self.IceDungeon.player.rect.y <= 2602):
+                        if (3968 <= self.IceDungeon.player.rect.x <= 4032) and self.IceDungeon.player.rect.y == 2606:
                             self.gameState.set_state('outside')
                             
                 if self.gameState.get_state() == 'outside':
