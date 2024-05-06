@@ -24,11 +24,11 @@ class Main:
             self.tamat = Menu_tamatan('menu_tamatan')
 
             self.states = {
-                'level':self.Dungeon,
-                'level2':self.IceDungeon,
+                'Dungeon':self.Dungeon,
+                'IceDungeon':self.IceDungeon,
                 'menu': self.menu,
                 'menu_kematian': self.menu_kematian,
-                'island': self.outside,
+                'outside': self.outside,
                 'menu_tamatan' :self.tamat
             }
 
@@ -46,7 +46,7 @@ class Main:
                 self.states[self.gameState.get_state()].run()
                 if self.gameState.get_state() == 'menu':
                     if self.menu.start_button.draw(self.screen): # Mengubah status ketika tombol start ditekan wwww
-                        self.gameState.set_state('level')
+                        self.gameState.set_state('Dungeon')
                     if self.menu.exit_button.draw(self.screen): # Keluar dari program saat tombol exit ditekan
                         pygame.quit()
                         sys.exit()
@@ -54,7 +54,7 @@ class Main:
                 if self.gameState.get_state() == 'menu_kematian':
                     self.states[self.gameState.get_state()].run()
                     if self.menu_kematian.retry_button.draw(self.screen):
-                        self.gameState.set_state('level')
+                        self.gameState.set_state('Dungeon')
                     if self.menu_kematian.exit_button.draw(self.screen):
                         pygame.quit()
                         sys.exit()
@@ -65,7 +65,7 @@ class Main:
                         pygame.quit()
                         sys.exit()
                     
-                if self.gameState.get_state() == 'level':
+                if self.gameState.get_state() == 'Dungeon':
                     if self.Dungeon.player.rect.x == 704 and self.Dungeon.player.rect.y == 2670:
                         self.pesan.draw(self.screen, image_0)
                     if self.Dungeon.player.rect.x == 4864 and self.Dungeon.player.rect.y == 2962:
@@ -86,9 +86,9 @@ class Main:
                         self.pesan.draw(self.screen, image_suffer)
                     if self.Dungeon.raccoon1.healt <= 0 and  self.Dungeon.raccoon2.healt <= 0 and  self.Dungeon.raccoon3.healt <= 0:
                         if self.Dungeon.player.rect.x == 192 and self.Dungeon.player.rect.y == 174:
-                            self.gameState.set_state('level2')
+                            self.gameState.set_state('IceDungeon')
                         
-                if self.gameState.get_state() == 'level2':
+                if self.gameState.get_state() == 'IceDungeon':
                     if self.IceDungeon.player.rect.x == 4672 and self.IceDungeon.player.rect.y == 366:
                         self.pesan.draw(self.screen, image_lastclue)
                     if self.IceDungeon.player.rect.x == 1134 and self.IceDungeon.player.rect.y == 283:
@@ -103,9 +103,9 @@ class Main:
                         self.pesan.draw(self.screen, image_path)
                     if self.IceDungeon.rakunmalas1.healt <= 0 and  self.IceDungeon.rakunmalas2.healt <= 0 and  self.IceDungeon.rakunmalas3.healt <= 0:
                         if (3968 <= self.IceDungeon.player.rect.x <= 4032) and (2676 <= self.IceDungeon.player.rect.y <= 2602):
-                            self.gameState.set_state('island')
+                            self.gameState.set_state('outside')
                             
-                if self.gameState.get_state() == 'island':
+                if self.gameState.get_state() == 'outside':
                     if (2091 <= self.outside.player.rect.x <= 2164) and self.outside.player.rect.y == 1298:
                         self.gameState.set_state('menu_tamatan')  
                 pygame.display.update()
