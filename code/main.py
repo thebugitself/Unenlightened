@@ -1,11 +1,11 @@
 import pygame, sys
-from config import *
-from dungeon import Dungeon
-from icedungeon import IceDungeon
-from game_state_manager import GameState
-from MenuSetting import *
-from messages import *
-from outside import OutsideDungeon
+from settings.config_settings import *
+from level.dungeon import Dungeon
+from level.icedungeon import IceDungeon
+from settings.game_state_manager import GameState
+from settings.menu_settings import *
+from interfaces.messages import *
+from level.outside import OutsideDungeon
 
 class Main:
     try: #penanganan kesalahan

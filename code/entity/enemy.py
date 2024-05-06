@@ -1,9 +1,9 @@
 from typing import Any
 import pygame 
-from config import *
-from extfunction import import_folder
+from settings.config_settings import *
+from settings.extfunction import import_folder
 from math import sin 
-from abstract import Entity
+from entity.abstract import Entity
 
 class Enemy(Entity): #inheritance
     def __init__(self,nama_monster,pos,groups,obstacle_sprites,damage_player,trigger_death_particles):

@@ -1,5 +1,5 @@
 import pygame
-from config import * 
+from settings.config_settings import * 
 
 class UI:
 	def __init__(self):

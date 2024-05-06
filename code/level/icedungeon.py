@@ -1,13 +1,13 @@
 import pygame
-from config import *
-from tile import Tile
-from player import Player
-from extfunction import *
-from enemy import Enemy
-from ui import UI
-from particles import AnimationPlayer
+from settings.config_settings import *
+from interfaces.tile import Tile
+from entity.player import Player
+from settings.extfunction import *
+from entity.enemy import Enemy
+from interfaces.ui import UI
+from interfaces.particles import AnimationPlayer
 from random import choice, randint
-from dungeon import *
+from level.dungeon import *
 
 class IceDungeon(Dungeon): #inheritance
     def __init__(self, gameStateManager):

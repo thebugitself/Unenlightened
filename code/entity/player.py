@@ -1,9 +1,9 @@
 import pygame 
-from config import *
-from extfunction import import_folder
+from settings.config_settings import *
+from settings.extfunction import import_folder
 from math import sin
-from game_state_manager import GameState
-from abstract import Entity
+from settings.game_state_manager import GameState
+from entity.abstract import Entity
 
 class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack):

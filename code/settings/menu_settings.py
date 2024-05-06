@@ -1,8 +1,7 @@
 import pygame, sys
-from config import *
+from settings.config_settings import *
 import random
-from config import *
-from game_state_manager import *
+from settings.game_state_manager import *
 
 class Menu:
     def __init__(self, gameStateManager):

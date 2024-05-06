@@ -1,5 +1,5 @@
 import pygame
-from extfunction import import_folder
+from settings.extfunction import import_folder
 from random import choice
 
 class AnimationPlayer:
