@@ -7,8 +7,8 @@ from settings.extfunction import *
 from entity.enemy import Enemy
 from interfaces.ui import UI
 from interfaces.particles import AnimationPlayer
-from random import choice, randint
-
+from random import randint
+from extmodul.game_light import Light
 class Dungeon:
     def __init__(self, gameStateManager):
         pygame.init() 
@@ -121,9 +121,9 @@ class Dungeon:
         self.visible_sprites.enemy_update(self.player)
         self.visible_sprites.update()
         self.player_atk_logic()
+        Light(self.display_surface).render()
         self.ui.display(self.player)
         self.draw_koordinat()
-            
 
 #penerapan enkapsulasi untuk cameranya
 class SortingCamera(pygame.sprite.Group):
