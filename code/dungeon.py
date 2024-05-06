@@ -9,7 +9,7 @@ from ui import UI
 from particles import AnimationPlayer
 from random import choice, randint
 
-class Level:
+class Dungeon:
     def __init__(self, gameStateManager):
         pygame.init() 
         self.font = pygame.font.Font(None,30)

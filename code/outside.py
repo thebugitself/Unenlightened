@@ -6,9 +6,9 @@ from extfunction import *
 from ui import UI
 from particles import AnimationPlayer
 from random import choice, randint
-from level import *
+from dungeon import *
 
-class Island(Level): #inherit
+class OutsideDungeon(Dungeon): #inherit
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         pygame.init() 

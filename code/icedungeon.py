@@ -7,13 +7,12 @@ from enemy import Enemy
 from ui import UI
 from particles import AnimationPlayer
 from random import choice, randint
-from level import *
+from dungeon import *
 
-class Level2(Level): #inheritance
+class IceDungeon(Dungeon): #inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         pygame.init() 
-        # Tampilan layar
         
         # Camera
         self.visible_sprites = SortingCamera2()
