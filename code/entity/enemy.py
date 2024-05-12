@@ -3,7 +3,7 @@ import pygame
 from settings.config_settings import *
 from settings.extfunction import import_folder
 from math import sin 
-from entity.abstract import Entity
+from settings.abstract import Entity
 
 class Enemy(Entity): #inheritance
     def __init__(self,nama_monster,pos,groups,obstacle_sprites,damage_player,trigger_death_particles):

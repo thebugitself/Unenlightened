@@ -3,7 +3,7 @@ from settings.config_settings import Config
 from settings.extfunction import import_folder
 from math import sin
 from service.game_state_manager import GameState
-from entity.abstract import Entity
+from settings.abstract import Entity
 
 class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack):
