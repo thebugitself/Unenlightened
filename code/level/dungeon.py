@@ -16,11 +16,7 @@ class Dungeon:
         pygame.init()
         #init
         self.save_load_manager = SaveLoadManager(".save","save_data")
-        self.initial_spawn = self.load_player_location()
-        self.rakun1_health = self.load_raccoon_health('1')
-        self.rakun2_health = self.load_raccoon_health('2')
-        self.rakun3_health = self.load_raccoon_health('3')
-
+        
         self.font = pygame.font.Font(None,30)
         # Tampilan layar
         self.gameStateManager = gameStateManager
@@ -56,6 +52,11 @@ class Dungeon:
             'topwall' : import_folder('../assets/map/topwall')
         }
         
+        self.initial_spawn = self.load_player_location()
+        self.rakun1_health = self.load_raccoon_health('1')
+        self.rakun2_health = self.load_raccoon_health('2')
+        self.rakun3_health = self.load_raccoon_health('3')
+
         for style, layout in layouts.items():
             for row_index,row in enumerate(layout):
                 for col_index, col in enumerate(row):

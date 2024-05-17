@@ -25,9 +25,9 @@ class Config:
 
     Enemy_Data = {
         'bamboo': {'health': 200, 'damage': 30, 'deffend': 3, 'speed': 2, 'atk_radius': 80, 'ntc_radius': 300, 'attack_type': 'leaf_attack', 'attack_sound': '../audio/zeeep.wav'},
-        'raccoon': {'health': 600, 'damage': 70, 'deffend': 3, 'speed': 4, 'atk_radius': 125, 'ntc_radius': 400, 'attack_type': 'claw', 'attack_sound': '../audio/raccoon.wav'},
+        'raccoon': {'health': 600, 'damage': 70, 'deffend': 3, 'speed': 4, 'atk_radius': 200, 'ntc_radius': 400, 'attack_type': 'claw', 'attack_sound': '../audio/raccoon.wav'},
         'spirit': {'health': 150, 'damage': 25, 'deffend': 3, 'speed': 3, 'atk_radius': 80, 'ntc_radius': 320, 'attack_type': 'thunder', 'attack_sound': '../audio/spirit.wav'},
         'squid': {'health': 400, 'damage': 20, 'deffend': 3, 'speed': 2, 'atk_radius': 80, 'ntc_radius': 320, 'attack_type': 'slash', 'attack_sound': '../audio/zeeep.wav'},
-        'rakunmalas': {'health': 1500, 'damage': 150, 'deffend': 3, 'speed': 7, 'atk_radius': 125, 'ntc_radius': 400, 'attack_type': 'claw', 'attack_sound': '../audio/raccoon.wav'}
+        'rakunmalas': {'health': 1500, 'damage': 150, 'deffend': 3, 'speed': 7, 'atk_radius': 230, 'ntc_radius': 400, 'attack_type': 'claw', 'attack_sound': '../audio/raccoon.wav'}
     }
 

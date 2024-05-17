@@ -65,7 +65,7 @@ class IceDungeon(Dungeon): #inheritance
                             else:
                                 if col == '1':
                                     self.rakunmalas1 = Enemy('rakunmalas',(4600,2700),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas1_health)
-                                    self.rakunmalas2 = Enemy('rakunmalas',(300,270),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas2_health)
+                                    self.rakunmalas2 = Enemy('rakunmalas',(504,2750),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas2_health)
                                     self.rakunmalas3 = Enemy('rakunmalas',(4250,453),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas3_health)
                                 elif col == '2':
                                     nama_monster = 'bamboo'

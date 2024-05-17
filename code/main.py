@@ -110,7 +110,7 @@ class Main:
                 if self.gameState.get_state() == 'IceDungeon':
                     if self.IceDungeon.player.rect.x == 4672 and self.IceDungeon.player.rect.y == 366:
                         self.pesan.draw(self.screen, image_lastclue)
-                    if self.IceDungeon.player.rect.x == 1134 and self.IceDungeon.player.rect.y == 283:
+                    if self.IceDungeon.player.rect.x == 1344 and self.IceDungeon.player.rect.y == 238:
                         self.pesan.draw(self.screen, image_keepgoing)
                     if self.IceDungeon.player.rect.x == 4864 and self.IceDungeon.player.rect.y == 174:
                         self.pesan.draw(self.screen, image_diedie)

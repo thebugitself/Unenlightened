@@ -45,7 +45,7 @@ class Player(Entity):
         self.switch_duration_cooldown = 200
 
         #stats
-        self.stats = {'health': 99999, 'energy': 999, 'attack': 9999, 'speed': 20}
+        self.stats = {'health': 300, 'energy': 150, 'attack': 10, 'speed': 7}
         self.health = self.stats['health']
         self.energy = self.stats['energy']
         self.speed = self.stats['speed']
@@ -57,7 +57,7 @@ class Player(Entity):
 
         #sound
         self.weapon_attack_sound = pygame.mixer.Sound('../audio/sword.wav')
-        self.weapon_attack_sound.set_volume(0.4)
+        self.weapon_attack_sound.set_volume(0.2)
 
     def import_graphics(self):
         character_path = '../assets/actor/MC/'
