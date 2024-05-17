@@ -45,7 +45,7 @@ class Player(Entity):
         self.switch_duration_cooldown = 200
 
         #stats
-        self.stats = {'health': 100, 'energy': 100, 'attack': 10, 'speed': 7}
+        self.stats = {'health': 99999, 'energy': 999, 'attack': 9999, 'speed': 20}
         self.health = self.stats['health']
         self.energy = self.stats['energy']
         self.speed = self.stats['speed']
@@ -231,7 +231,7 @@ class Player(Entity):
     
     def energy_drop(self):
         if self.energy <= 100:
-            self.energy += 0.08
+            self.energy += 0.3
 
     def update(self):
         self.keybind()

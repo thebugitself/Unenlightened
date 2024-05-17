@@ -11,9 +11,9 @@ from level.dungeon import *
 
 class IceDungeon(Dungeon): #inheritance
     def __init__(self, gameStateManager):
+        pygame.init()
         super().__init__(gameStateManager)
-        pygame.init() 
-        
+
         # Camera
         self.visible_sprites = SortingCamera2()
         self.obstacle_sprites = pygame.sprite.Group()
@@ -32,6 +32,7 @@ class IceDungeon(Dungeon): #inheritance
 
         #particles
         self.animation_player = AnimationPlayer()
+        
      
     def create_map(self): #polimorfisme
         layouts = {
@@ -42,6 +43,10 @@ class IceDungeon(Dungeon): #inheritance
         collide_surf = {
             'topwall' : import_folder('../assets/map/topwall')
         }
+        self.initial_spawn2 = self.load_player_location()
+        self.malas1_health = self.load_rakunmalas_health('1')
+        self.malas2_health = self.load_rakunmalas_health('2')
+        self.malas3_health = self.load_rakunmalas_health('3')
         
         for style, layout in layouts.items():
             for row_index,row in enumerate(layout):
@@ -56,12 +61,12 @@ class IceDungeon(Dungeon): #inheritance
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'topwall', surf)
                         if style == 'entities' :
                             if col == '0':
-                                self.player = Player((4864,876),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)#Player
+                                self.player = Player(self.initial_spawn2,[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)#Player
                             else:
                                 if col == '1':
-                                    self.rakunmalas1 = Enemy('rakunmalas',(4600,2700),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
-                                    self.rakunmalas2 = Enemy('rakunmalas',(300,270),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
-                                    self.rakunmalas3 = Enemy('rakunmalas',(4250,453),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
+                                    self.rakunmalas1 = Enemy('rakunmalas',(4600,2700),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas1_health)
+                                    self.rakunmalas2 = Enemy('rakunmalas',(300,270),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas2_health)
+                                    self.rakunmalas3 = Enemy('rakunmalas',(4250,453),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.malas3_health)
                                 elif col == '2':
                                     nama_monster = 'bamboo'
                                 elif col == '3':
@@ -69,10 +74,10 @@ class IceDungeon(Dungeon): #inheritance
                                 else:
                                     nama_monster = 'squid'
                                     
-                                self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
+                                self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, 600)
     
     def save_player_location(self):#polimorfisme
-        player_pos = f"{self.player.rect.x}:{self.player.rect.y}:IceDungeon"
+        player_pos = f"{self.player.rect.x}:{self.player.rect.y}:IceDungeon:{self.rakunmalas1.health}:{self.rakunmalas2.health}:{self.rakunmalas3.health}"
         self.save_load_manager.save_data(player_pos,Config.SAVE_ICEDUNGEON_PLAYER_POS)
 
     def load_player_location(self):#polimorfisme
@@ -81,6 +86,24 @@ class IceDungeon(Dungeon): #inheritance
             player_pos =( int(player_pos.split(":")[0]), int(player_pos.split(":")[1]))
             return player_pos
         return (4864,876)
+    
+    def load_rakunmalas_health(self, rakun):
+        health = self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS)
+        if rakun == '1':
+            if health:
+                health = (int(health.split(":")[3]))
+                return health
+            return 1600
+        elif rakun == '2':
+            if health:
+                health = (int(health.split(":")[4]))
+                return health
+            return 1600
+        elif rakun == '3':
+            if health:
+                health = (int(health.split(":")[5]))
+                return health
+            return 1600
 
     def run(self): #polimorfisme
         self.visible_sprites.custom_draw(self.player)

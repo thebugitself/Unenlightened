@@ -7,6 +7,7 @@ from interfaces.menu import *
 from interfaces.messages import *
 from level.outside import OutsideDungeon
 from service.save_load_manager import SaveLoadManager
+from settings.extfunction import sound
 import os
 
 class Main:
@@ -26,6 +27,8 @@ class Main:
             self.pesan = Pesan()
             self.tamat = Menu_tamatan('menu_tamatan')
             self.save = False
+            self.main_sound = pygame.mixer.Sound('../audio/main.ogg')
+            self.cave_sound = pygame.mixer.Sound("../audio/caves.ogg")
 
             self.states = {
                 'Dungeon':self.Dungeon,
@@ -36,9 +39,7 @@ class Main:
                 'menu_tamatan' :self.tamat,
             }
 
-            #main sound
-            main_sound = pygame.mixer.Sound('../audio/main.ogg')
-            main_sound.play(loops = -1)
+            sound(self.main_sound, 'play')
 
         def run(self):
             while True:
@@ -62,6 +63,9 @@ class Main:
                             self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS).split(":")[2])
                         else:
                             self.gameState.set_state('Dungeon')
+                        sound(self.main_sound, 'stop')
+                        sound(self.cave_sound, 'play')
+
                     if self.menu.exit_button.draw(self.screen): # Keluar dari program saat tombol exit ditekan
                         pygame.quit()
                         sys.exit()
@@ -99,7 +103,7 @@ class Main:
                         self.pesan.draw(self.screen, image_close)
                     if self.Dungeon.player.rect.x == 4864 and self.Dungeon.player.rect.y == 2194:
                         self.pesan.draw(self.screen, image_suffer)
-                    if self.Dungeon.raccoon1.healt <= 0 and  self.Dungeon.raccoon2.healt <= 0 and  self.Dungeon.raccoon3.healt <= 0:
+                    if self.Dungeon.raccoon1.health <= 0 and  self.Dungeon.raccoon2.health <= 0 and  self.Dungeon.raccoon3.health <= 0:
                         if self.Dungeon.player.rect.x == 192 and self.Dungeon.player.rect.y == 174:
                             self.gameState.set_state('IceDungeon')
                         
@@ -116,7 +120,7 @@ class Main:
                         self.pesan.draw(self.screen, image_cold)
                     if self.IceDungeon.player.rect.x == 1856 and self.IceDungeon.player.rect.y == 2286:
                         self.pesan.draw(self.screen, image_path)
-                    if self.IceDungeon.rakunmalas1.healt <= 0 and  self.IceDungeon.rakunmalas2.healt <= 0 and  self.IceDungeon.rakunmalas3.healt <= 0:
+                    if self.IceDungeon.rakunmalas1.health <= 0 and  self.IceDungeon.rakunmalas2.health <= 0 and  self.IceDungeon.rakunmalas3.health <= 0:
                         if (3968 <= self.IceDungeon.player.rect.x <= 4032) and self.IceDungeon.player.rect.y == 2606:
                             self.gameState.set_state('outside')
                             

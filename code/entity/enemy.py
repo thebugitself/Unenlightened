@@ -6,7 +6,7 @@ from math import sin
 from settings.abstract import Entity
 
 class Enemy(Entity): #inheritance
-    def __init__(self,nama_monster,pos,groups,obstacle_sprites,damage_player,trigger_death_particles):
+    def __init__(self,nama_monster,pos,groups,obstacle_sprites,damage_player,trigger_death_particles, health):
         super().__init__(groups,obstacle_sprites)
         self.sprite_type = 'enemy'
         self.frame_index = 0
@@ -22,7 +22,7 @@ class Enemy(Entity): #inheritance
         
         self.nama_monster = nama_monster
         monster_info = Config.Enemy_Data[self.nama_monster]
-        self.healt = monster_info['healt']
+        self.health = health
         self.attack_damage = monster_info['damage']
         self.deffend = monster_info['deffend']
         self.speed = monster_info['speed']
@@ -154,12 +154,12 @@ class Enemy(Entity): #inheritance
         if self.eneble_get_atk:
             self.hit_sound.play()
             self.direction = self.get_position_player(player)[1]
-            self.healt = self.healt - player.get_weapon_damage()
+            self.health = self.health - player.get_weapon_damage()
             self.hit_time = pygame.time.get_ticks()
             self.eneble_get_atk = False
     
     def death(self):
-        if self.healt <= 0:
+        if self.health <= 0:
             self.kill()
             self.trigger_death_particles(self.rect.center, self.nama_monster)
             self.death_sound.play()

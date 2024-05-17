@@ -17,6 +17,9 @@ class Dungeon:
         #init
         self.save_load_manager = SaveLoadManager(".save","save_data")
         self.initial_spawn = self.load_player_location()
+        self.rakun1_health = self.load_raccoon_health('1')
+        self.rakun2_health = self.load_raccoon_health('2')
+        self.rakun3_health = self.load_raccoon_health('3')
 
         self.font = pygame.font.Font(None,30)
         # Tampilan layar
@@ -70,9 +73,9 @@ class Dungeon:
                                 self.player = Player(self.initial_spawn,[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)#Player
                             else:
                                 if col == '1':
-                                    self.raccoon1 = Enemy('raccoon',(4600,2700),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
-                                    self.raccoon2 = Enemy('raccoon',(300,270),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
-                                    self.raccoon3 = Enemy('raccoon',(4250,453),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
+                                    self.raccoon1 = Enemy('raccoon',(4600,2700),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.rakun1_health)
+                                    self.raccoon2 = Enemy('raccoon',(300,270),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.rakun2_health)
+                                    self.raccoon3 = Enemy('raccoon',(4250,453),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, self.rakun3_health)
                                 elif col == '2':
                                     nama_monster = 'spirit'
                                 elif col == '3':
@@ -80,7 +83,7 @@ class Dungeon:
                                 else:
                                     nama_monster = 'spirit'
 
-                                self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles)
+                                self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, 300)
         
     def create_attack(self):
         self.current_attack = Weapon(self.player,[self.visible_sprites, self.attack_sprites]) 
@@ -126,7 +129,7 @@ class Dungeon:
         Player.koordinat(self.player.rect.y,1200,10,'y',self.font)
 
     def save_player_location(self):
-        player_pos = f"{self.player.rect.x}:{self.player.rect.y}:Dungeon"
+        player_pos = f"{self.player.rect.x}:{self.player.rect.y}:Dungeon:{self.raccoon1.health}:{self.raccoon2.health}:{self.raccoon3.health}"
         self.save_load_manager.save_data(player_pos,Config.SAVE_DUNGEON_PLAYER_POS)
 
     def load_player_location(self):
@@ -135,6 +138,24 @@ class Dungeon:
             player_pos =( int(player_pos.split(":")[0]), int(player_pos.split(":")[1]))
             return player_pos
         return (197,2788)
+    
+    def load_raccoon_health(self, rakun):
+        health = self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS)
+        if rakun == '1':
+            if health:
+                health = (int(health.split(":")[3]))
+                return health
+            return 800
+        elif rakun == '2':
+            if health:
+                health = (int(health.split(":")[4]))
+                return health
+            return 800
+        elif rakun == '3':
+            if health:
+                health = (int(health.split(":")[5]))
+                return health
+            return 800
     
     def run(self):
         self.visible_sprites.custom_draw(self.player)
