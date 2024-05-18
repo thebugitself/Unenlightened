@@ -1,6 +1,6 @@
 class Config:
-    SAVE_DUNGEON_PLAYER_POS = 'save_dungeon_player_pos'
-    SAVE_ICEDUNGEON_PLAYER_POS = 'save_icedungeon_player_pos'
+    SAVE_DUNGEON = 'SAVE_DUNGEON'
+    SAVE_ICEDUNGEON = 'SAVE_ICEDUNGEON'
     WIDTH    = 1280	
     HEIGTH   = 720
     FPS      = 60

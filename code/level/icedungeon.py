@@ -78,17 +78,17 @@ class IceDungeon(Dungeon): #inheritance
     
     def save_player_location(self):#polimorfisme
         player_pos = f"{self.player.rect.x}:{self.player.rect.y}:IceDungeon:{self.rakunmalas1.health}:{self.rakunmalas2.health}:{self.rakunmalas3.health}"
-        self.save_load_manager.save_data(player_pos,Config.SAVE_ICEDUNGEON_PLAYER_POS)
+        self.save_load_manager.save_data(player_pos,Config.SAVE_ICEDUNGEON)
 
     def load_player_location(self):#polimorfisme
-        player_pos = self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS)
+        player_pos = self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON)
         if player_pos:
             player_pos =( int(player_pos.split(":")[0]), int(player_pos.split(":")[1]))
             return player_pos
         return (4864,876)
     
     def load_rakunmalas_health(self, rakun):
-        health = self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS)
+        health = self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON)
         if rakun == '1':
             if health:
                 health = (int(health.split(":")[3]))

@@ -131,17 +131,17 @@ class Dungeon:
 
     def save_player_location(self):
         player_pos = f"{self.player.rect.x}:{self.player.rect.y}:Dungeon:{self.raccoon1.health}:{self.raccoon2.health}:{self.raccoon3.health}"
-        self.save_load_manager.save_data(player_pos,Config.SAVE_DUNGEON_PLAYER_POS)
+        self.save_load_manager.save_data(player_pos,Config.SAVE_DUNGEON)
 
     def load_player_location(self):
-        player_pos = self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS)
+        player_pos = self.save_load_manager.load_data(Config.SAVE_DUNGEON)
         if player_pos:
             player_pos =( int(player_pos.split(":")[0]), int(player_pos.split(":")[1]))
             return player_pos
         return (197,2788)
     
     def load_raccoon_health(self, rakun):
-        health = self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS)
+        health = self.save_load_manager.load_data(Config.SAVE_DUNGEON)
         if rakun == '1':
             if health:
                 health = (int(health.split(":")[3]))

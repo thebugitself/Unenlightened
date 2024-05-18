@@ -49,7 +49,7 @@ class Main:
                             self.Dungeon.save_player_location()
                             self.save = True
                         elif self.gameState.get_state() == "IceDungeon":
-                            self.save_load_manager.del_file(Config.SAVE_DUNGEON_PLAYER_POS)
+                            self.save_load_manager.del_file(Config.SAVE_DUNGEON)
                             self.IceDungeon.save_player_location()
                         pygame.quit()
                         sys.exit()
@@ -57,10 +57,10 @@ class Main:
                 self.states[self.gameState.get_state()].run()
                 if self.gameState.get_state() == 'menu':
                     if self.menu.start_button.draw(self.screen): # Mengubah status ketika tombol start ditekan wwww
-                        if os.path.exists('../save_data/save_dungeon_player_pos.save') and self.save:
-                            self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_DUNGEON_PLAYER_POS).split(":")[2])
-                        if not os.path.exists('../save_data/save_dungeon_player_pos.save') and os.path.exists('../save_data/save_icedungeon_player_pos.save'):
-                            self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON_PLAYER_POS).split(":")[2])
+                        if os.path.exists('../save_data/SAVE_DUNGEON.save') and self.save:
+                            self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_DUNGEON).split(":")[2])
+                        if not os.path.exists('../save_data/SAVE_DUNGEON.save') and os.path.exists('../save_data/SAVE_ICEDUNGEON.save'):
+                            self.gameState.set_state(self.save_load_manager.load_data(Config.SAVE_ICEDUNGEON).split(":")[2])
                         else:
                             self.gameState.set_state('Dungeon')
                         sound(self.main_sound, 'stop')
@@ -76,7 +76,6 @@ class Main:
                         self.gameState.set_state('Dungeon')
                     if self.menu_kematian.exit_button.draw(self.screen):
                         pygame.quit()
-                        sys.exit()
 
                 if self.gameState.get_state() == 'menu_tamatan':
                     self.states[self.gameState.get_state()].run()
