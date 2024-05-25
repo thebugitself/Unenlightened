@@ -40,6 +40,7 @@ class Dungeon:
         #particles
         self.animation_player = AnimationPlayer()
         #other
+        self.dimana = ''
         
     
     def create_map(self):
@@ -120,6 +121,7 @@ class Dungeon:
             self.gameStateManager.set_state('menu_kematian')
             self.player.kill()
             self.player.destroy_attack()
+            self.dimana = 'dungeon'
             self.player = Player((4000,2632),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
                     
     def trigger_death_particles(self, pos, particle_type):

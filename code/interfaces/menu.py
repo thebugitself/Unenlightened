@@ -18,7 +18,6 @@ class Menu:
         self.title.draw(self.screen)
         self.daun.update()
         self.daun.draw(self.screen)
-
         
 class Menu_kematian(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
@@ -31,6 +30,15 @@ class Menu_kematian(Menu): #penerapan inheritance
     def run(self): #penerapan polimorfisme
         self.bg_mati.draw(self.screen)
         
+class Menu_pause(Menu):
+    def __init__(self, gameStateManager):
+        super().__init__(gameStateManager)
+        self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
+        self.exit_button = Button(555, 409, '../assets/menu/exit_btn.png', 0.8)
+        self.bg_mati = BackGround(320, 200, '../assets/menu/Bg_Pause_menu.png', 0.5)
+    
+    def run(self): #penerapan polimorfisme
+        self.bg_mati.draw(self.screen)
 
 class Menu_tamatan(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):

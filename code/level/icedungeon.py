@@ -75,6 +75,19 @@ class IceDungeon(Dungeon): #inheritance
                                     nama_monster = 'squid'
                                     
                                 self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, 600)
+    def damage_to_player(self, damage, attack_type):
+        if not self.player.health <= 0:
+            if self.player.eneble_get_atk:
+                self.player.health = self.player.health - damage
+                self.player.eneble_get_atk = False
+                self.player.hurt_time = pygame.time.get_ticks()
+                self.animation_player.create_particles(attack_type, self.player.rect.center, self.visible_sprites)
+        else:
+            self.gameStateManager.set_state('menu_kematian')
+            self.player.kill()
+            self.player.destroy_attack()
+            self.dimana = 'icedungeon'
+            self.player = Player((1024,238),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
     
     def save_player_location(self):#polimorfisme
         player_pos = f"{self.player.rect.x}:{self.player.rect.y}:IceDungeon:{self.rakunmalas1.health}:{self.rakunmalas2.health}:{self.rakunmalas3.health}"
