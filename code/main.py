@@ -92,7 +92,7 @@ class Main:
 
                 if self.gameState.get_state() == 'menu_kematian':
                     self.states[self.gameState.get_state()].run()
-                    if self.menu_kematian.retry_button.draw(self.screen):
+                    if self.menu_kematian.revive_button.draw(self.screen):
                         if self.Dungeon.dimana == 'dungeon':
                             self.gameState.set_state('Dungeon')
                         if self.IceDungeon.dimana == 'icedungeon':

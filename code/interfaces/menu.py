@@ -23,7 +23,7 @@ class Menu_kematian(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):
         super().__init__(gameStateManager)
         self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
-        self.retry_button = Button(555, 350, '../assets/menu/Revive_btn.png', 0.215)
+        self.revive_button = Button(555, 350, '../assets/menu/Revive_btn.png', 0.215)
         self.exit_button = Button(555, 460, '../assets/menu/exit_btn.png', 0.8)
         self.bg_mati = Title(500, 100, '../assets/menu/Bg_menu_mati2.png', 300, 500) #Kenapa pake Title karena fungsinya sama
         
@@ -35,7 +35,7 @@ class Menu_pause(Menu):
         super().__init__(gameStateManager)
         self.screen = pygame.display.set_mode((Config.WIDTH,Config.HEIGTH))
         self.exit_button = Button(555, 409, '../assets/menu/exit_btn.png', 0.8)
-        self.bg_mati = BackGround(320, 200, '../assets/menu/Bg_Pause_menu.png', 0.5)
+        self.bg_pause = BackGround(320, 200, '../assets/menu/Bg_Pause_menu.png', 0.5)
     
     def run(self): #penerapan polimorfisme
         self.bg_mati.draw(self.screen)
