@@ -38,7 +38,7 @@ class Menu_pause(Menu):
         self.bg_pause = BackGround(320, 200, '../assets/menu/Bg_Pause_menu.png', 0.5)
     
     def run(self): #penerapan polimorfisme
-        self.bg_mati.draw(self.screen)
+        self.bg_pause.draw(self.screen)
 
 class Menu_tamatan(Menu): #penerapan inheritance
     def __init__(self, gameStateManager):

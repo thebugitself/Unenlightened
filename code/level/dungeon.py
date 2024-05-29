@@ -71,7 +71,6 @@ class Dungeon:
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'topwall', surf)
                         if style == 'entities' :
                             if col == '0':
-                                
                                 self.player = Player(self.initial_spawn,[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)#Player
                             else:
                                 if col == '1':
@@ -84,7 +83,6 @@ class Dungeon:
                                     nama_monster = 'bamboo' 
                                 else:
                                     nama_monster = 'spirit'
-
                                 self.enemy = Enemy(nama_monster,(x,y),[self.visible_sprites, self.attackable_sprites], self.obstacle_sprites, self.damage_to_player, self.trigger_death_particles, 300)
         
     def create_attack(self):
@@ -101,14 +99,7 @@ class Dungeon:
                 collision_sprites = pygame.sprite.spritecollide(attack_sprite,self.attackable_sprites,False)
                 if collision_sprites:
                     for target_sprite in collision_sprites:
-                        if target_sprite.sprite_type == 'grass':#???
-                            pos = target_sprite.rect.center
-                            offset = pygame.math.Vector2(0, 75)
-                            for leaf in range(randint(3, 6)):#???
-                                self.animation_player.create_grass_particles(pos-offset, [self.visible_sprites])
-                            target_sprite.kill()
-                        else:
-                            target_sprite.get_damage(self.player)
+                        target_sprite.get_damage(self.player)
                         
     def damage_to_player(self, damage, attack_type):
         if not self.player.health <= 0:

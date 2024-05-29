@@ -19,7 +19,7 @@ class Config:
     ENERGY_COLOR = 'yellow'
     UI_BORDER_COLOR_ACTIVE = 'gold'
     weapon_data = {
-        'sword': {'cooldown': 100, 'damage': 15, 'graphic':'../assets/weapon/sword/full.png'},
+        'sword': {'cooldown': 100, 'damage': 40, 'graphic':'../assets/weapon/sword/full.png'},
         'tombak': {'cooldown': 100, 'damage': 30, 'graphic':'../assets/weapon/tombak/full.png'}
     }
 
