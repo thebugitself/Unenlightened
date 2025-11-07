@@ -1,5 +1,5 @@
 
-# Unenlightened - Tugas Besar PBO RB
+# Unenlightened
 
 <img width="1281" height="747" alt="image" src="https://github.com/user-attachments/assets/c949df73-6517-4c1b-9a46-5f04e73279ac" />
 
